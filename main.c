@@ -3,5 +3,5 @@
 
 int main(){
 
-    check_battery_status(39);
+    check_battery_status(35);
 }
