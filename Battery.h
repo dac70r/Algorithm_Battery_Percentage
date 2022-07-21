@@ -22,8 +22,9 @@ extern "C"
 #define BATTERY_STATUS_INITIAL                             0x00
 
 //Function declaration
-uint8_t compute_battery(uint8_t);
-void check_battery_status(uint8_t);
+uint8_t compute_battery(float);
+uint8_t determine_range(uint8_t);
+void check_battery_status(float);
 
 #ifdef __cplusplus
 }

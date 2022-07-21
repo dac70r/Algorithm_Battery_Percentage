@@ -5,52 +5,54 @@ uint8_t battery_status;
 uint8_t battery_percentage = BATTERY_PERCENTAGE_INITIAL;    //set battery percentage to 100 initially                                           
 uint8_t app_battery_status; 
 
-uint8_t compute_battery(uint8_t battery_reading){
+uint8_t compute_battery(float battery_reading){
     return ((battery_reading-30))* 100 /(42-30);
 }
 
-void check_battery_status(uint8_t battery_reading)
+uint8_t determine_range(uint8_t battery_reading){
+    if(battery_reading >80){return 1;}
+    else if(battery_reading <= 80 && battery_reading > 63){return 2;}
+    else if(battery_reading <= 63 && battery_reading > 45){return 3;}
+    else if(battery_reading <= 45 && battery_reading > 28){return 4;}
+    else if(battery_reading <= 28){return 5;}
+    else {return 0;}
+}
+
+void check_battery_status(float battery_reading)
 {
     
     printf("Before: battery_status_0: %d\n",battery_status_0);
     int x = compute_battery(battery_reading);
+    int y = determine_range(x);
 
-    
-    switch(x)
+    switch(y)
     {
-        case 100:
-        case 91:
-        case 83:
+        case 1:
+            battery_status = GLOWING_AQUA;
             printf("Battery now at %d%% %d color:GLOWING_AQUA\n",x, battery_status);
             if (battery_status_0 != battery_status){printf("Sending 5 bars to Dashboard (insert driver here)\n"); app_battery_status = battery_status;}
             printf("app_battery_status: %d\n",app_battery_status);
             break;
-
-        case 75:
-        case 66:
+        case 2:
+            battery_status = GLOWING_GREEN;
             printf("Battery now at %d%% %d color:GLOWING_GREEN\n",x, battery_status);
             if (battery_status_0 != battery_status){printf("Sending 4 bars to Dashboard (insert driver here)\n"); app_battery_status = battery_status;}
             printf("app_battery_status: %d\n",app_battery_status);
             break;
-        
-        case 58:
-        case 50:
+        case 3:
+            battery_status = YELLOW;        
             printf("Battery now at %d%% %d color:YELLOW\n",x, battery_status);
             if (battery_status_0 != battery_status){printf("Sending 3 bars to Dashboard (insert driver here)\n"); app_battery_status = battery_status;}
             printf("app_battery_status: %d\n",app_battery_status);
             break;
-        
-        case 41:
-        case 33:
+        case 4:
+            battery_status = ORANGE;
             printf("Battery now at %d%% %d color:ORANGE\n",x, battery_status);
             if (battery_status_0 != battery_status){printf("Sending 2 bars to Dashboard (insert driver here)\n"); app_battery_status = battery_status;}
             printf("app_battery_status: %d\n",app_battery_status);
             break;
-
-        case 25:
-        case 16:
-        case 8:
-        case 0:
+        case 5:
+            battery_status = RED;
             printf("Battery now at %d%% %d color:RED\n",x, battery_status);
             if (battery_status_0 != battery_status){printf("Sending 1 bars to Dashboard (insert driver here)\n"); app_battery_status = battery_status;}
             printf("app_battery_status: %d\n",app_battery_status);

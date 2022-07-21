@@ -4,6 +4,7 @@
 int main(){
 
     check_battery_status(42);
+    check_battery_status(41.5);
     check_battery_status(41);
     check_battery_status(40);
     check_battery_status(39);
@@ -16,5 +17,5 @@ int main(){
     check_battery_status(32);
     check_battery_status(31);
     check_battery_status(30);
-    
+
 }
