@@ -1,2 +1,6 @@
+a.exe
+battery.o
+main.o
+
 .exe
-.obj
+.o
