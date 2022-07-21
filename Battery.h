@@ -21,8 +21,9 @@ extern "C"
 #define RED                                                0x04     
 #define BATTERY_STATUS_INITIAL                             0x00
 
-uint8_t compute_battery(void);
-void check_battery_status(void)  ;        // compute B%
+//Function declaration
+uint8_t compute_battery(uint8_t);
+void check_battery_status(uint8_t);
 
 #ifdef __cplusplus
 }

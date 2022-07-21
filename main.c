@@ -3,5 +3,5 @@
 
 int main(){
 
-    printf("%d",compute_battery());
+    check_battery_status(39);
 }
